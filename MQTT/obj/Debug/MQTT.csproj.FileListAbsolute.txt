@@ -1,8 +1,0 @@
-C:\VS_Working\Projects\MQTT\MQTT\bin\Debug\MQTT.exe.config
-C:\VS_Working\Projects\MQTT\MQTT\bin\Debug\MQTT.exe
-C:\VS_Working\Projects\MQTT\MQTT\bin\Debug\MQTT.pdb
-C:\VS_Working\Projects\MQTT\MQTT\bin\Debug\M2Mqtt.Net.dll
-C:\VS_Working\Projects\MQTT\MQTT\bin\Debug\M2Mqtt.Net.pdb
-C:\VS_Working\Projects\MQTT\MQTT\obj\Debug\MQTT.csprojResolveAssemblyReference.cache
-C:\VS_Working\Projects\MQTT\MQTT\obj\Debug\MQTT.exe
-C:\VS_Working\Projects\MQTT\MQTT\obj\Debug\MQTT.pdb
