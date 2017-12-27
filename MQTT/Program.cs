@@ -11,6 +11,12 @@ namespace MQTT
         public static void Main(string[] args)
         {
             var publisher = new AuMQTT("YourDeviceId");
+            publisher.Topic = "YourTopic";
+            publisher.MqttPolicy = 1;
+            publisher.YourPfxCertificate = "YourCertificate.pfx";
+            publisher.YourPfxCertificatePassword = "YourPassword";
+            publisher.YourPemFile = "YourPemFile.pem";
+
             publisher.Subscribe();
             publisher.ReceiveMqttMsgEvent += Publisher_ReceiveMqttMsgEvent;
             string read;

@@ -13,7 +13,7 @@ namespace MQTT
         /// <summary>
         /// AWS IoT endpoint - replace with your own
         /// </summary>
-        public const string IotEndpoint = "a2ozbiqpxuh70j.iot.us-east-1.amazonaws.com";
+        public const string IotEndpoint = "************.us-east-1.amazonaws.com";
         /// <summary>
         /// TLS1.2 port used by AWS IoT
         /// </summary>
@@ -25,6 +25,12 @@ namespace MQTT
         /// </summary>
         public string Topic = "test";
 
+        public byte MqttPolicy= MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE;
+
+        public string YourPfxCertificate = "YourCertificate.pfx";
+        public string YourPfxCertificatePassword = "YourPassword";
+        public string YourPemFile = "YourPemFile.pem";
+
         public MqttClient client;
 
         public AuMQTT(string DeviceId)
@@ -35,9 +41,9 @@ namespace MQTT
                 {
                     //convert to pfx using openssl
                     //you'll need to add these two files to the project and copy them to the output
-                    var clientCert = new X509Certificate2("certificate.pfx", "123");
+                    var clientCert = new X509Certificate2(YourPfxCertificate, YourPfxCertificatePassword);
                     //this is the AWS caroot.pem file that you get as part of the download
-                    var caCert = X509Certificate.CreateFromSignedFile("MyIoT.cert.pem"); // this doesn't have to be a new X509 type...
+                    var caCert = X509Certificate.CreateFromSignedFile(YourPemFile); // this doesn't have to be a new X509 type...
 
                     client = new MqttClient(IotEndpoint, BrokerPort, true, caCert, clientCert, MqttSslProtocols.TLSv1_2 /*this is what AWS IoT uses*/);
 
@@ -93,7 +99,7 @@ namespace MQTT
 
                 // '#' is the wildcard to subscribe to anything under the 'root' topic
                 // the QOS level here - I only partially understand why it has to be this level - it didn't seem to work at anything else.
-                client.Subscribe(new[] { Topic }, new[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                client.Subscribe(new[] { Topic }, new[] { MqttPolicy });
                 return true;
             }
             catch (Exception ex)
