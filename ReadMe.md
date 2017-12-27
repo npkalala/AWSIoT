@@ -44,13 +44,13 @@ $ var publisher = new AuMQTT("YourDeviceId");
 Settings
 ```sh
  //'Qos'
- publisher.MqttPolicy = 1; 
+ $ publisher.MqttPolicy = 1; 
  //'pfx file'
- publisher.YourPfxCertificate = "YourCertificate.pfx";
+ $ publisher.YourPfxCertificate = "YourCertificate.pfx";
  //'password'
- publisher.YourPfxCertificatePassword = "YourPassword";
+ $ publisher.YourPfxCertificatePassword = "YourPassword";
  //'Pem file'
- publisher.YourPemFile = "YourPemFile.pem";
+ $ publisher.YourPemFile = "YourPemFile.pem";
 ```
 Setup Topic :
 ```sh
