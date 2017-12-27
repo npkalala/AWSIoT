@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace MQTT
 {
+    public delegate void ReceiveMqttMsgEventHadler(MqttMsgPublishEventArgs e);
     public class AuMQTT
     {
+        public event ReceiveMqttMsgEventHadler ReceiveMqttMsgEvent;
         /// <summary>
         /// AWS IoT endpoint - replace with your own
         /// </summary>
@@ -111,52 +110,8 @@ namespace MQTT
         /// <param name="e"></param>
         public void ClientMqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            Console.WriteLine("We received a message...");
-            Console.WriteLine(Encoding.UTF8.GetChars(e.Message));
+            if (this.ReceiveMqttMsgEvent != null)
+                this.ReceiveMqttMsgEvent(e);
         }
-
-        #region
-        //public void Subscribe()
-        //{
-        //    try
-        //    {
-        //        var clientCert = new X509Certificate2("certificate.pfx", "123");
-        //        var caCert = X509Certificate.CreateFromSignedFile("MyIoT.cert.pem");
-        //        // create the client
-        //        var client = new MqttClient(IotEndpoint, BrokerPort, true, caCert, clientCert, MqttSslProtocols.TLSv1_2, client_RemoteCertificateValidationCallback);
-        //        client.ProtocolVersion = MqttProtocolVersion.Version_3_1;
-        //        ushort msgId = client.Subscribe(new string[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-        //        client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-        //        client.MqttMsgSubscribed += Client_MqttMsgSubscribed;
-
-        //        //client = new MqttClient(IotEndpoint, BrokerPort, true, caCert, clientCert, MqttSslProtocols.TLSv1_2);
-        //        //byte code = client.Connect(Guid.NewGuid().ToString());
-        //        //ushort msgId = client.Subscribe(new string[] { Topic }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-        //        //client.MqttMsgPublishReceived += Client_MqttMsgPublishReceived;
-
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        var x = ex;
-        //    }
-        //}
-
-        //bool client_RemoteCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-        //{
-        //    // logic for validation here
-        //    var x = 1;
-        //    return true;
-        //}
-
-        //private void Client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
-        //{
-        //    var x = e;
-        //}
-
-        //private void Client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
-        //{
-        //    Console.WriteLine("Received = " + Encoding.UTF8.GetString(e.Message) + " on topic " + e.Topic);
-        //}
-        #endregion
     }
 }
