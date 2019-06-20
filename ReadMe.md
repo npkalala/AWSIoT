@@ -63,6 +63,8 @@ publisher.Publish("Message");
 Subscribe Topic :
 ```csharp
 publisher.Subscribe();
+//implement the delegate event
+publisher.ReceiveMqttMsgEvent += Publisher_ReceiveMqttMsgEvent;
 ```
 ```csharp
 private static void Publisher_ReceiveMqttMsgEvent(uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
