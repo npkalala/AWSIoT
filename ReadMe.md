@@ -42,30 +42,30 @@ $ var publisher = new AuMQTT("YourDeviceId");
 ```
 
 Settings
-```sh
+```csharp
  //'Qos'
- $ publisher.MqttPolicy = 1; 
+ publisher.MqttPolicy = 1; 
  //'pfx file'
- $ publisher.YourPfxCertificate = "YourCertificate.pfx";
+ publisher.YourPfxCertificate = "YourCertificate.pfx";
  //'password'
- $ publisher.YourPfxCertificatePassword = "YourPassword";
+ publisher.YourPfxCertificatePassword = "YourPassword";
  //'Pem file'
- $ publisher.YourPemFile = "YourPemFile.pem";
+ publisher.YourPemFile = "YourPemFile.pem";
 ```
 Setup Topic :
-```sh
-$ publisher.Topic = "YourTopic";
+```csharp
+publisher.Topic = "YourTopic";
 ```
 Publish Message :
-```sh
-$ publisher.Publish("Message");
+```csharp
+publisher.Publish("Message");
 ```
 Subscribe Topic :
-```sh
-$ publisher.Subscribe();
+```csharp
+publisher.Subscribe();
 ```
-```sh
-$ private static void Publisher_ReceiveMqttMsgEvent(uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
+```csharp
+private static void Publisher_ReceiveMqttMsgEvent(uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
 {
      Console.WriteLine(Encoding.UTF8.GetChars(e.Message));
 }
